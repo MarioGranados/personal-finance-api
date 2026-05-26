@@ -1,11 +1,7 @@
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+package com.mario.personal_finance_api.Models;
+
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
 @Builder
@@ -15,6 +11,7 @@ import lombok.Setter;
 @Setter
 
 public class Expense {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,7 +19,7 @@ public class Expense {
     private String expenseName;
     private Long expenseCost;
 
-    @ManyToOne(fetch = Fetch.Type.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
