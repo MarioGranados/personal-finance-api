@@ -3,6 +3,8 @@ package com.mario.personal_finance_api.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
+@Table(name = "budgets")
 @Data
 @Builder
 @NoArgsConstructor

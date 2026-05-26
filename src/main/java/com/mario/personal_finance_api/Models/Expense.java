@@ -3,6 +3,8 @@ package com.mario.personal_finance_api.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
+@Table(name = "expenses")
 @Data
 @Builder
 @NoArgsConstructor
@@ -17,7 +19,7 @@ public class Expense {
     private Long id;
 
     private String expenseName;
-    private Long expenseCost;
+    private double expenseCost;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
