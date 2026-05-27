@@ -11,6 +11,6 @@ import com.mario.personal_finance_api.Models.User;
 @Repository
 public interface UserRepo extends JpaRepository<User, Long> {
 
-    Optional<User> findByUsername(String username);
+    User findByUsername (String username);
 
 }

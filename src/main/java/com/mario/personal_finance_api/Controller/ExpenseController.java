@@ -30,7 +30,8 @@ public class ExpenseController {
 
     @GetMapping("/user/{user_id}")
     public ResponseEntity<List<Expense>> getUserExpensesById(@PathVariable Long user_id) {
-        return ResponseEntity.ok(expenseRepo.findAllByUserId(user_id));
+        User user = userRepo.findById(user_id).orElseThrow(() -> new RuntimeException("Error fetching user!"));
+        return ResponseEntity.ok(expenseRepo.findAllByUserId(user.getId()));
     }
 
     @PostMapping("/user/{user_id}")

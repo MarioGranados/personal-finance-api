@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mario.personal_finance_api.Models.LoginRequest;
 import com.mario.personal_finance_api.Models.User;
 import com.mario.personal_finance_api.Repository.UserRepo;
 
@@ -28,11 +29,19 @@ public class UserController {
         return ResponseEntity.ok(userRepo.save(newUser));
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+    @PostMapping("/login")
+    public ResponseEntity<User> userLogin(@RequestBody LoginRequest loginRequest) {
 
-        return userRepo.findByUsername(username)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        User user = userRepo.findByUsername(loginRequest.getUsername());
+        if(user == null) {
+            return ResponseEntity.status(404).build();
+        }
+        if(user.getPassword().equals(loginRequest.getPassword())) {
+            return ResponseEntity.ok().body(user);
+        } 
+        return ResponseEntity.status(401).build();
     }
+
+
+
 }
