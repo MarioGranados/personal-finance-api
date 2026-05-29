@@ -1,7 +1,7 @@
 package com.mario.personal_finance_api.Models;
 
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;

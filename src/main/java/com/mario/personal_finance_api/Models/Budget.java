@@ -1,7 +1,8 @@
 package com.mario.personal_finance_api.Models;
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "budgets")

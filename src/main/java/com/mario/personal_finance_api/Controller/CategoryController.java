@@ -3,6 +3,7 @@ package com.mario.personal_finance_api.Controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mario.personal_finance_api.Models.User;
 import com.mario.personal_finance_api.Models.Category;
-
+import com.mario.personal_finance_api.Models.Expense;
 import com.mario.personal_finance_api.Repository.CategoryRepo;
 import com.mario.personal_finance_api.Repository.UserRepo;
 
@@ -35,6 +36,15 @@ public class CategoryController {
     @PostMapping("/user/{user_id}")
     public ResponseEntity<Category> createCategory(@RequestParam Category newCategory) {
         return ResponseEntity.ok(categoryRepo.save(newCategory));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Category> deleteCategory(@PathVariable Long id) {
+        Category category = categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found"));
+
+        categoryRepo.delete(category);
+        return ResponseEntity.ok().build();
     }
 
 }
